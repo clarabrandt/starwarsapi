@@ -1,19 +1,19 @@
 const mysql = require('mysql');
+const express = require('express');
+const router = express.Router();
 
-const con = mysql.createConnection({
+const pool = mysql.createPool({
+  connectionLimit: 50,
   host: "localhost",
   user: "user",
   password: "password",
-  database: "starwarsapi"
+  database: "starwarsapi",
+  port: 3306
 });
 
+let filmsdb = {};
 
-con.connect(function (err) {
-  if (err) throw err;
-  con.query("SELECT * FROM films", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
-});
 
-module.exports = con;
+
+
+module.exports = filmsdb;

@@ -13,7 +13,16 @@ const pool = mysql.createPool({
 
 let filmsdb = {};
 
-
+filmsdb.all = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM films`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results)
+    })
+  })
+}
 
 
 

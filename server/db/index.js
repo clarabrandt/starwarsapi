@@ -13,16 +13,22 @@ const pool = mysql.createPool({
 
 let filmsdb = {};
 
-filmsdb.all = () => {
+filmsdb.search = (search_term) => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM films`, (err, results) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(results)
-    })
+    pool.query(`SELECT people.name, people.height
+                  FROM people, films, people_in_film 
+                  WHERE people_in_film.film = films.id 
+                  AND people_in_film.people = people.id
+                  AND title LIKE '${search_term}'`,
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results)
+      })
   })
 }
+
 
 
 

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db')
+const filmsdb = require('../db')
 
 router.get('/', async (req, res, next) => {
   try {
-    let results = await db.all();
+    let results = await filmsdb.search();
     res.json(results)
   } catch (err) {
     console.log(err)

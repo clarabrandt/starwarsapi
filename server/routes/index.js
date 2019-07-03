@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const filmsdb = require('../db')
+const db = require('../db');
 
-router.get('/', async (req, res, next) => {
-  try {
-    let results = await filmsdb.search();
-    res.json(results)
-  } catch (err) {
-    console.log(err)
-    res.sendStatus(500)
-  }
+
+router.get('/search', (req, res) => {
+  const { q, order } = req.query
+  db.search(q, order)
+    .then(result => res.json({
+      result
+    }));
 });
+
 
 module.exports = router;

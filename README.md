@@ -19,3 +19,7 @@ $ npm install
 
 # Start
 $ npm init
+
+# Start docker and dump database
+
+$ docker-compose up -d

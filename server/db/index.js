@@ -13,6 +13,7 @@ const pool = mysql.createPool({
 
 let db = {};
 
+
 db.search = (search_term, order) => {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT people.name, people.height
@@ -29,5 +30,6 @@ db.search = (search_term, order) => {
       })
   })
 }
+
 
 module.exports = db;
